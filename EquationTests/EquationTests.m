@@ -112,7 +112,7 @@ Equation* e;
 // 試しにわざとエラーになるようにしてみましょう。
 // 同じ式で期待値をわざと変えてみました。
 /*
-- (void)testError
+ - (void)testError
 {
     e = [[Equation alloc] initWithA:1 b:2 c:2];
     
@@ -129,6 +129,10 @@ Equation* e;
 // それでテストがパスしてしまったのですね。
 
 
+
+
+// x^2 - 6x + 8 = 0 をテスト
+// 実数解 2つの場合。
 - (void)test5
 {
     e = [[Equation alloc] initWithA:1 b:-6 c:8];
@@ -136,40 +140,48 @@ Equation* e;
     // STAssertEqualsWithAccuracy は浮動小数点演算をテストするときに使います。
     // 浮動小数点演算では誤差が発生するので，誤差の範囲内で等しいことを確かめる必要があります。
     // accuracy とは誤差のことです。
-    STAssertEqualsWithAccuracy(2.0, [e real1], 0.00001, @"real1 error");
-    STAssertEqualsWithAccuracy(4.0, [e real2], 0.00001, @"real2 error");
+    STAssertEqualsWithAccuracy(4.0, [e real1], 0.00001, @"real1 error");
+    STAssertEqualsWithAccuracy(2.0, [e real2], 0.00001, @"real2 error");
     STAssertEqualsWithAccuracy(0.0, [e imaginary1], 0.00001, @"imaginary1 error");
     STAssertEqualsWithAccuracy(0.0, [e imaginary2], 0.00001, @"imaginary2 error");
 }
 
+// x^2 + 6x + 9 = 0 をテスト
+// 実数解 1つ(重解)の場合。
 - (void)test6
 {
     e = [[Equation alloc] initWithA:1 b:6 c:9];
     
-    STAssertEqualsWithAccuracy(3.0, [e real1], 0.00001, @"real1 error");
-    STAssertEqualsWithAccuracy(3.0, [e real2], 0.00001, @"real2 error");
+    STAssertEqualsWithAccuracy(-3.0, [e real1], 0.00001, @"real1 error");
+    STAssertEqualsWithAccuracy(-3.0, [e real2], 0.00001, @"real2 error");
     STAssertEqualsWithAccuracy(0.0, [e imaginary1], 0.00001, @"imaginary1 error");
     STAssertEqualsWithAccuracy(0.0, [e imaginary2], 0.00001, @"imaginary2 error");
 }
 
+
+// x^2 - 4x + 2 = 0 をテスト
+// 実数解 2つの場合。
 - (void)test7
 {
-    e = [[Equation alloc] initWithA:1 b:-2 c:-1];
+    e = [[Equation alloc] initWithA:1 b:-4 c:2];
     
-    STAssertEqualsWithAccuracy(1.0+sqrt(2.0), [e real1], 0.00001, @"real1 error");
-    STAssertEqualsWithAccuracy(1.0-sqrt(2.0), [e real2], 0.00001, @"real2 error");
+    STAssertEqualsWithAccuracy(2.0+sqrt(2.0), [e real1], 0.00001, @"real1 error");
+    STAssertEqualsWithAccuracy(2.0-sqrt(2.0), [e real2], 0.00001, @"real2 error");
     STAssertEqualsWithAccuracy(0.0, [e imaginary1], 0.00001, @"imaginary1 error");
     STAssertEqualsWithAccuracy(0.0, [e imaginary2], 0.00001, @"imaginary2 error");
 }
 
+
+// x^2 + 2x + 4 = 0 をテスト
+// 虚数解 2つの場合。
 - (void)test8
 {
-    e = [[Equation alloc] initWithA:1 b:2 c:2];
+    e = [[Equation alloc] initWithA:1 b:2 c:4];
     
     STAssertEqualsWithAccuracy(-1.0, [e real1], 0.00001, @"real1 error");
     STAssertEqualsWithAccuracy(-1.0, [e real2], 0.00001, @"real2 error");
-    STAssertEqualsWithAccuracy(1.0, [e imaginary1], 0.00001, @"imaginary1 error");
-    STAssertEqualsWithAccuracy(-1.0, [e imaginary2], 0.00001, @"imaginary2 error");
+    STAssertEqualsWithAccuracy(3.0, [e imaginary1], 0.00001, @"imaginary1 error");
+    STAssertEqualsWithAccuracy(-3.0, [e imaginary2], 0.00001, @"imaginary2 error");
 }
 
 
