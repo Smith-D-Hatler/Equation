@@ -180,10 +180,58 @@ Equation* e;
     
     STAssertEqualsWithAccuracy(-1.0, [e real1], 0.00001, @"real1 error");
     STAssertEqualsWithAccuracy(-1.0, [e real2], 0.00001, @"real2 error");
-    STAssertEqualsWithAccuracy(3.0, [e imaginary1], 0.00001, @"imaginary1 error");
-    STAssertEqualsWithAccuracy(-3.0, [e imaginary2], 0.00001, @"imaginary2 error");
+    STAssertEqualsWithAccuracy(1.73205080757, [e imaginary1], 0.00001, @"imaginary1 error");
+    STAssertEqualsWithAccuracy(-1.73205080757, [e imaginary2], 0.00001, @"imaginary2 error");
 }
 
+//課題３
+
+// 0x^2 - x + 2 = 0 をテスト
+// x^2の係数が　0の場合。
+- (void)test9
+{
+    e = [[Equation alloc] initWithA:0 b:-1 c:2];
+    STAssertEqualsWithAccuracy(2.0, [e real1], 0.00001, @"real1 error");
+    STAssertEqualsWithAccuracy(0.0, [e real2], 0.00001, @"real2 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary1], 0.00001, @"imaginary1 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary2], 0.00001, @"imaginary2 error");   }
+
+// x^2 - 0x - 4 = 0 をテスト
+// 実数解 2つの場合。(b=0)
+- (void)test10
+{
+    e = [[Equation alloc] initWithA:1 b:0 c:-4];
+    
+    STAssertEqualsWithAccuracy(2.0, [e real1], 0.00001, @"real1 error");
+    STAssertEqualsWithAccuracy(-2.0, [e real2], 0.00001, @"real2 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary1], 0.00001, @"imaginary1 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary2], 0.00001, @"imaginary2 error");
+}
+
+// x^2 - 0x - 2 = 0 をテスト
+// 実数解 2つの場合。(b=0)
+- (void)test11
+{
+    e = [[Equation alloc] initWithA:1 b:0 c:-2];
+    
+    STAssertEqualsWithAccuracy(1.41421356, [e real1], 0.00001, @"real1 error");
+    STAssertEqualsWithAccuracy(-1.41421356, [e real2], 0.00001, @"real2 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary1], 0.00001, @"imaginary1 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary2], 0.00001, @"imaginary2 error");
+}
+
+// 0x^2 - 0x + 0 = 0 をテスト
+// x^2の係数が　0 ,xの係数が0 の場合、
+//定数項が０のときしか成り立たない。
+- (void)test12
+{
+    e = [[Equation alloc] initWithA:0 b:0 c:0];
+    
+    STAssertEqualsWithAccuracy(0.0, [e real1], 0.00001, @"real1 error");
+    STAssertEqualsWithAccuracy(0.0, [e real2], 0.00001, @"real2 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary1], 0.00001, @"imaginary1 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary2], 0.00001, @"imaginary2 error");
+   }
 
 
 @end
